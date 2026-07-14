@@ -87,8 +87,14 @@ st.markdown("Interactive view of revenue, products, customers aur trends.")
 total_revenue = filtered["TotalPrice"].sum()
 total_orders = filtered["InvoiceNo"].nunique()
 total_customers = filtered["CustomerID"].nunique()
-avg_order_value = filtered.groupby("InvoiceNo")["TotalPrice"].sum().mean()
-
+if filtered.empty:
+    avg_order_value = 0
+else:
+    avg_order_value = (
+        filtered.groupby("InvoiceNo")["TotalPrice"]
+        .sum()
+        .mean()
+    )
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Total Revenue", f"£{total_revenue:,.0f}")
 col2.metric("Total Orders", f"{total_orders:,}")
