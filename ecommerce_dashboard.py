@@ -20,7 +20,6 @@ sns.set_style("whitegrid")
 # ---------------------------------------------------------
 DATA_PATH = "data.csv"   
 
-
 @st.cache_data
 def load_data(path):
     df = pd.read_csv(path,encoding="latin1")
